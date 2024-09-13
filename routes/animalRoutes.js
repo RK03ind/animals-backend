@@ -1,12 +1,12 @@
-const express = require("express");
-const {
+import { Router } from "express";
+import {
   getAllAnimals,
   addAnimal,
   updateAnimal,
   deleteAnimal,
-} = require("../controllers/animalController");
+} from "../controllers/animalController.js";
 
-const router = express.Router();
+const router = Router();
 
 router.get("/", getAllAnimals);
 
@@ -16,4 +16,4 @@ router.put("/:id", updateAnimal);
 
 router.delete("/:id", deleteAnimal);
 
-module.exports = router;
+export default router;

@@ -1,14 +1,16 @@
-const { Low, JSONFile } = require("lowdb");
-const path = require("path");
+import { Low } from "lowdb";
+import { JSONFile } from "lowdb/node";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const file = path.join(__dirname, "db.json");
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const file = join(__dirname, "db.json");
 const adapter = new JSONFile(file);
-const db = new Low(adapter);
+export const db = new Low(adapter);
 
-const initDB = async () => {
+export const initDB = async () => {
   await db.read();
   db.data = db.data || { animals: [] };
   await db.write();
 };
-
-module.exports = { db, initDB };
